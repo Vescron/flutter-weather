@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:weather/weather_service.dart';
@@ -11,13 +10,54 @@ class WeatherPage extends StatefulWidget {
   State<WeatherPage> createState() => _WeatherPageState();
 }
 
+
 class _WeatherPageState extends State<WeatherPage> {
 
   Weather? weather;
   String conditionImage = 'assets/cloudy.json';
 
+  Future<void> showCityDialog() async {
+  String enteredCity = "";
+  await showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('Enter City Name'),
+        content: TextField(
+          onChanged: (value) {
+            enteredCity = value;
+          },
+          decoration: const InputDecoration(hintText: "City Name"),
+        ),
+        actions: <Widget>[
+          TextButton(
+            child: const Text('OK'),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+        ],
+      );
+    },
+  );
+
+  if (enteredCity.isNotEmpty) {
+    // Fetch weather data using the entered city
+    final currentWeather = await getWeather(enteredCity);
+    setState(() {
+      weather = currentWeather;
+    });
+  }
+}
+
   fetchWeather() async {
-    String currentCity = await getCurrentCity();
+    String currentCity;
+    try{
+      currentCity = await getCurrentCity();
+    } catch (e) {
+      print("Error fetching current city: $e");
+      // Fallback to a default city or show an error message
+      showCityDialog();
+      return;
+    }
     final currentWeather = await getWeather(currentCity);
     switch(currentWeather.description.toLowerCase()) {
       case 'clear':
@@ -33,7 +73,7 @@ class _WeatherPageState extends State<WeatherPage> {
         break;
       case 'drizzle':
       case 'rain':
-        conditionImage = 'assets/rainy.json';
+        conditionImage = 'assets/rain.json';
         break;
       case 'thunderstorm':
         conditionImage = 'assets/thunderstorm.json';

@@ -25,7 +25,7 @@ class Weather {
 
 Future<Weather> getWeather(String city) async {
     // Fetch weather data from an API
-    final response = await http.get(Uri.parse('https://api.openweathermap.org/data/2.5/weather?q=Anantnag&appid=0fd1287b44b57da2e3e4118d94f046e9'));
+    final response = await http.get(Uri.parse('https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=0fd1287b44b57da2e3e4118d94f046e9'));
     
     if (response.statusCode == 200) {
       // If the server returns a 200 OK response, parse the JSON.
@@ -41,8 +41,16 @@ Future<String> getCurrentCity() async {
   if (permission == LocationPermission.denied) {
     permission = await Geolocator.requestPermission();
   }
+
   Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-  List<Placemark> placemarks = await placemarkFromCoordinates(position.latitude, position.longitude);
+  print("Current position: ${position.latitude}, ${position.longitude}");
+  if (position == null) {
+    throw Exception("Could not determine the current position.");
+  }
+
+  List<Placemark> placemarks = [];
+  placemarks = await placemarkFromCoordinates(position.latitude, position.longitude);
   String? city = placemarks[0].locality;
   return city ?? "";
 }
+
