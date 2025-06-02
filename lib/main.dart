@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
           colorScheme: darkDynamic,
           useMaterial3: true
         ),
-        themeMode: ThemeMode.dark,
+        themeMode: ThemeMode.system,
         home: WeatherPage(),
       );
   });

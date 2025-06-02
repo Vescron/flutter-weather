@@ -44,9 +44,6 @@ Future<String> getCurrentCity() async {
 
   Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
   print("Current position: ${position.latitude}, ${position.longitude}");
-  if (position == null) {
-    throw Exception("Could not determine the current position.");
-  }
 
   List<Placemark> placemarks = [];
   placemarks = await placemarkFromCoordinates(position.latitude, position.longitude);

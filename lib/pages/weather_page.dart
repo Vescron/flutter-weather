@@ -109,7 +109,7 @@ class _WeatherPageState extends State<WeatherPage> {
                   style: GoogleFonts.bebasNeue(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
-                    color: Colors.grey.withOpacity(0.5),
+                    color: Theme.of(context).colorScheme.primary.withOpacity(0.5),
                   ),
                   ),
                 ],
@@ -120,14 +120,14 @@ class _WeatherPageState extends State<WeatherPage> {
               style: GoogleFonts.bebasNeue(
                     fontSize: 50,
                     fontWeight: FontWeight.bold,
-                    color: Colors.grey.withOpacity(0.5),
+                    color: Theme.of(context).colorScheme.secondary.withOpacity(0.5),
                   ),
               ),
               Text(weather?.description ?? 'loading...',
               style: GoogleFonts.bebasNeue(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
-                    color: Colors.grey.withOpacity(0.5),
+                    color: Theme.of(context).colorScheme.tertiary.withOpacity(0.5),
                   ),
               )
             ]
@@ -137,7 +137,7 @@ class _WeatherPageState extends State<WeatherPage> {
     floatingActionButton: FloatingActionButton(
       backgroundColor: Theme.of(context).colorScheme.background, 
       onPressed: fetchWeather,
-      child: Icon(Icons.refresh, color: Colors.white),
+      child: Icon(Icons.refresh, color: Theme.of(context).colorScheme.secondary.withOpacity(0.5)),
     ),
     floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
     );
