@@ -50,10 +50,10 @@ flutter_launcher_icons:
   android: true
   min_sdk_android: 21
   image_path: "assets/ic_launcher.png"
-  adaptive_icon_background: "#FFFFFF"
+  adaptive_icon_background: "#222c33"
   adaptive_icon_foreground: "assets/ic_launcher.png"
   adaptive_icon_monochrome: "assets/ic_monochrome.png"
-  adaptive_icon_foreground_inset: 20
+  # adaptive_icon_foreground_inset: 20
 dev_dependencies:
   flutter_test:
     sdk: flutter
