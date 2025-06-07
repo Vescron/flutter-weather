@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dynamic_color/dynamic_color.dart';
+import 'package:weather/pages/homepage.dart';
 import 'package:weather/pages/weather_page.dart';
 
 void main() {
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
           useMaterial3: true
         ),
         themeMode: ThemeMode.system,
-        home: WeatherPage(),
+        home: HomePage(),
       );
   });
   }
